@@ -13,11 +13,11 @@ while x == 0:
         x = 1
 #correcting any typing error the user may have done
     else:
-        print("that is not an option, please enter M or F")
+        print("That is not an option, please enter M or F.")
 
 while x == 1:
 #finding the users weight
-    W = input("what is your mass/weight in kg?: ")
+    W = input("What is your mass/weight in kg?: ")
 #testing for typing errors
     try:
         W = float(W)
@@ -25,13 +25,13 @@ while x == 1:
             x = 2
 #correcting any typing error the user may have done
         else:
-            print("you must enter a positive value")
+            print("You must enter a positive value.")
     except:
-        print("you must enter an integer")
+        print("You must enter an integer.")
 
 while x == 2:
 #finding how long since the user had alcohol
-    t = input("how long ago since you consumed the alcohol? (hours) ")
+    t = input("How long ago since you consumed the alcohol? (hours) ")
 
     try:
         t = float(t)
@@ -39,13 +39,13 @@ while x == 2:
             x = 3
 # correcting any typing error the user may have done
         else:
-            print("you must enter a positive value")
+            print("You must enter a positive value.")
     except:
-        print("you must enter an integer")
+        print("You must enter an integer.")
 
 while x == 3:
 #finding how many standard drinks the user has had
-    A = input("how many standard drinks have you consumed? ")
+    A = input("How many standard drinks have you consumed? ")
 
     try:
         A = float(A)
@@ -53,17 +53,17 @@ while x == 3:
             x = 4
 # correcting any typing error the user may have done
         else:
-            print("you must enter a positive value")
+            print("You must enter a positive value.")
     except:
-        print("you must enter an integer")
+        print("You must enter an integer.")
 #calculating the BAC if the user
 BAC = (((A/(r*W))*100)-0.00015*t)/100
 #printing BAC of the user
-print("your BAC is:", str("%.2f" % BAC))
+print("Your BAC is:", str("%.2f" % BAC))
 
 while x == 4:
 #finding the drivers license of the user
-    l = input("drivers license? (L, P or FL (fully licensed)): ")
+    l = input("Drivers license? (L, P or FL (fully licensed)): ")
     if l == "L":
 #printing possible consequences
         if BAC >= 0.5:
@@ -93,6 +93,6 @@ for at least six months once you are relicensed.''')
         x = 5
 # correcting any typing error the user may have done
     else:
-        print("that is not an option, please enter L, P or FL")
+        print("That is not an option, please enter L, P or FL.")
 #exiting program
 exit(0)
