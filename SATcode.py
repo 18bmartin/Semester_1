@@ -45,8 +45,8 @@ class PasswordTester:
 
         if length < 8:
             self.errorText = Label(text= '''Your password must 
-    be greater than or equal 
-    to 8 characters in length ''')
+    be greater than or equal    
+    to 8 characters in length    ''')
             self.errorText.grid(row=5)
         elif p1 != p2:
             self.errorText = Label(text='''The 2 passwords you
@@ -54,6 +54,11 @@ class PasswordTester:
                                     ''')
             self.errorText.grid(row=5)
         else:
+            self.spaceText = Label(text='''                                                
+      
+      
+                                 ''')
+            self.spaceText.grid(row=5, column=0)
             p1 = str(p1).encode('utf-8')
             hashPassword = hashlib.sha1(p1)
             hashPassword = hashPassword.hexdigest()
