@@ -2,9 +2,8 @@
 from tkinter import *
 #importing the hashlib library in order to hash the password
 import hashlib
-
-#opening the file the send the results from the Pwned passwords website
-PPR = open('Pwnedpasswordresults.txt', 'a')
+#importing the os library to connect to the internet website
+import os
 
 #creating the GUI
 class PasswordTester:
@@ -26,7 +25,7 @@ class PasswordTester:
 #position of entry space
         self.enterPass1.grid(row = 1, column = 1)
 
-# creating label for the second password input
+#creating label for the second password input
         self.inputText2 = Label(master, text="           Re-Enter Password      ")
 #position of label on GUI
         self.inputText2.grid(row = 2, column = 0)
@@ -96,12 +95,50 @@ class PasswordTester:
 #deleting the password variables now they are no longer necessary
             p1 = 0
             p2 = 0
-#splitting the hash into affixes
+#splitting the hash into affixes and making them all capitals
             hPrefix = hashPassword[0:5]
-            hSuffix = hashPassword[5:]
+            hSuffix = hashPassword[6:]
+            hPrefix = hPrefix.upper()
+            hSuffix = hSuffix.upper()
 
-#closing the file the send the results from the Pwned passwords website
-PPR.close()
+#sending the hash prefix to the website and sending the results to a file
+            os.system('curl https://api.pwnedpasswords.com/range/' + hPrefix + '>PPR.txt')
+
+#opening the file the send the results from the Pwned passwords website
+            PPR = open('PPR.txt', 'r')
+#defining a variable for the while loop
+            x = 0
+#reading the file line by line
+            fileRead = PPR.readline().strip()
+#for each line within the file
+            while fileRead:
+#search for the hash suffix within the line
+                fileSearch = fileRead.find(hSuffix)
+#if the hash suffix is found within the line
+                if fileSearch != -1:
+                    result = fileRead[36:]
+# creating the result message
+                    self.resultText = Label(text='''this password 
+      has been PWNED 
+     ''' + result + " times     ")
+# position of result message
+                    self.resultText.grid(row=5, column=1)
+#making x = 1 for if the suffix has been found
+                    x = 1
+#reading the next line and repeat process
+                fileRead = PPR.readline().strip()
+#if the suffix has not been found
+            if x == 0:
+# creating the result message
+                self.resultText = Label(text='''  this password 
+has not been 
+      PWNED               ''')
+
+# position of result message
+                self.resultText.grid(row=5, column=1)
+
+#deleting the file with all the possible hash suffixes
+os.system('rm PPR.txt')
 
 #Functions to make the GUI work
 root = Tk()
