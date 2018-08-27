@@ -1,9 +1,33 @@
 """ Author: Brent martin
 Date:
 Version: 1.0
-This code will allow users to test their passwords against a database of stolen passwords
-in order to test whether their passwords are secure. The database can either be in the form of
-the website 'PWNED passwords' with a database of stolen passwords or an offline version the user provides."""
+This code will allow users to test their passwords against a database of stolen passwords in order to check
+whether their passwords are secure. The database is in the form of the website 'PWNED passwords' which is
+a database of all passwords which have already been broken into and so are insecure. For security reasons the code will
+only send the first 5 digits of a Hashed version of their entered password and then search through the many corresponding hashes.
+
+variables in order of appearance:
+Binary Search:
+    list = the list of possible hashes gotten from the website
+    target = the hash which is being searched for in the list
+    Pwned = a binary value definiing whether or not the target is within the list
+    low = the lowest value within the search algorithm
+    high = the highest value within the search algorithm
+    mid = the midpoint between low and high
+    val = the varible at the position of mid within the list
+p1/self.pass1 = the first user input for their password
+p2/self.pass2 = the second user input for their password
+length = the length of the first password input
+hashPassword = the first password input (after testing that p1 = p2) made into hash format
+p1/p2 = zero values so they are forgotten
+hPrefix = the first 5 digits of the hash
+hSuffix = the last 35 digits of the hash
+PPR = returned fil with all the Pwned passwords correlating to the hash prefix and the number of times they have been pwned
+fileRead = a single line of the file, looping through the whole file
+fileList = each of the hash suffixes returned placed into a list
+pwnedList = the number of times each hash has been pwned placed into a list
+position[0]/result = the position of the correct hash in the fileList
+#position[1]/Pwned = the binary value of whether or not the hash suffix has been found in the list"""
 
 #importing the Tkinter library in order to create the GUI
 from tkinter import *
@@ -134,7 +158,6 @@ class PasswordTester:
             p1 = 0
             p2 = 0
 #splitting the hash into affixes and making them all capitals
-            print(hashPassword)
             hPrefix = hashPassword[0:5]
             hSuffix = hashPassword[5:]
             hPrefix = hPrefix.upper()
@@ -157,9 +180,8 @@ class PasswordTester:
                 fileRead = PPR.readline().strip('\n')
 #using the binary search to get a return on whether or not the password has been Pwned
             position = BinarySearch(fileList, hSuffix)
-#position[0] is the position in the list of hash suffixes and the result is that same position on the Pwned list
+#splitting the 2 values of position into their respective duties
             result = pwnedList[int(position[0])]
-#position[1] is the binary value of whether or not the hash suffix has been found in the list
             Pwned = position[1]
 #if the hash suffix has been found:
             if Pwned == 1:
