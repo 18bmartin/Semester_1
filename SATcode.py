@@ -10,11 +10,11 @@ variables in order of appearance:
 Binary Search:
     list = the list of possible hashes gotten from the website
     target = the hash which is being searched for in the list
-    Pwned = a binary value definiing whether or not the target is within the list
+    Pwned = a binary value defining whether or not the target is within the list
     low = the lowest value within the search algorithm
     high = the highest value within the search algorithm
     mid = the midpoint between low and high
-    val = the varible at the position of mid within the list
+    val = the variable at the position of mid within the list
 p1/self.pass1 = the first user input for their password
 p2/self.pass2 = the second user input for their password
 length = the length of the first password input
@@ -22,12 +22,12 @@ hashPassword = the first password input (after testing that p1 = p2) made into h
 p1/p2 = zero values so they are forgotten
 hPrefix = the first 5 digits of the hash
 hSuffix = the last 35 digits of the hash
-PPR = returned fil with all the Pwned passwords correlating to the hash prefix and the number of times they have been pwned
+PPR  = returned file with all the Pwned passwords correlating to the hash prefix and the number of times they have been pwned
 fileRead = a single line of the file, looping through the whole file
 fileList = each of the hash suffixes returned placed into a list
 pwnedList = the number of times each hash has been pwned placed into a list
 position[0]/result = the position of the correct hash in the fileList
-# position[1]/Pwned = the binary value of whether or not the hash suffix has been found in the list"""
+position[1]/Pwned = the binary value of whether or not the hash suffix has been found in the list"""
 
 # importing the Tkinter library in order to create the GUI
 from tkinter import *
@@ -46,7 +46,7 @@ def BinarySearch(list, target):
     while low < high:
 # finding the midpoint of the section being searching
         mid = (low + high) // 2
-# getitng the value from the midpoint
+# getting the value from the midpoint
         val = list[mid]
 # making all the variables strings for consistent < > = comparisons
         target = str(target)
