@@ -54,6 +54,7 @@ def BinarySearch(list, target):
         mid = str(mid)
         low = str(low)
         high = str(high)
+        print(target, val, mid, low, high)
 # if the target is found
         if target == val:
 # making the binary 1 as a 'True' value to whether or not the hash Suffix is within the list
@@ -163,6 +164,8 @@ class PasswordTester:
             hSuffix = hashPassword[5:]
             hPrefix = hPrefix.upper()
             hSuffix = hSuffix.upper()
+# deleting the full version of the hashed password
+            hashPassword = 0
 # sending the hash prefix to the website and sending the results to a file
             os.system('curl https://api.pwnedpasswords.com/range/' + hPrefix + '>PPR.txt')
 # opening the file the send the results from the Pwned passwords website
@@ -183,12 +186,15 @@ class PasswordTester:
             position = BinarySearch(fileList, hSuffix)
 # splitting the 2 values of position into their respective duties part 1
             Pwned = position[1]
+# deleting the separate parts of the hashed password
+            hPrefix = 0
+            hSuffix = 0
 # if the hash suffix has been found:
             if Pwned == 1:
 # splitting the 2 values of position into their respective duties part 2
                 result = pwnedList[int(position[0])]
 # displays a message informing the user that the password they have input is not secure
-                self.resultText = Label(text='''this password
+                self.resultText = Label(text='''This password
       has been PWNED
      ''' + result + " times     ")
 # position of result message
@@ -196,14 +202,18 @@ class PasswordTester:
 # if the hash suffix has NOT been found:
             else:
 # displays a message saying the password has not been Pwned
-                self.resultText = Label(text='''  this password
+                self.resultText = Label(text='''  This password
 has not been
       PWNED               ''')
 # position of result message
                 self.resultText.grid(row=5, column=1)
+#resetting the Pwned value so that all passwords added after will not automatically say they are "Pwned"
             Pwned = 0
 # deleting the file with all the possible hash suffixes
 os.system('rm PPR.txt')
+# clearing the lists when they are no longer in use
+fileList = []
+pwnedList = []
 # Functions to make the GUI work
 root = Tk()
 gui = PasswordTester(root)
