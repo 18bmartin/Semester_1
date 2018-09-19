@@ -54,7 +54,6 @@ def BinarySearch(list, target):
         mid = str(mid)
         low = str(low)
         high = str(high)
-        print(target, val, mid, low, high)
 # if the target is found
         if target == val:
 # making the binary 1 as a 'True' value to whether or not the hash Suffix is within the list
